@@ -1,0 +1,14 @@
+{
+  "name": "Embed-YV4Web",
+  "author": "Yoctopuce",
+  "description": "Yoctopuce sample WebApp embedding Yocto-Visualization-for-Web",
+  "scripts": {
+    "build": "tsc && npx esbuild app.js --bundle --sourcemap --minify --outfile=app.min.js",
+    "app-server": "tsc -d false -m commonjs app-server.ts && node app-server.js",
+    "clean": "del app*.js && del app*.js.map"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "typescript": "^5.9.3"
+  }
+}

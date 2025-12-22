@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+<!--
+   **************************************************
+   Yocto-Visualization (for web)  configuration file
+   **************************************************
+-->
+<ROOT version='2.1'>
+<Sensors>
+  <Sensor ID="METEOMK2-2A4EF4.temperature"/>
+</Sensors>
+<GraphForm>
+  <container id='YV4Wcontainer'/>
+  <location x='0' y='0'/>
+  <size     w='400' h='400'  state='Normal'/>
+  <relativeCoord x='0' y='0' w='90' h='100' active='True'/>
+  <Graph_showRecordedData value="TRUE"/>
+  <Graph_series0>
+    <DataSource_source value="METEOMK2-2A4EF4.temperature"/>
+    <DataSource_datatype value="0"/>
+    <thickness value="2"/>
+    <legend value="Temperature"/>
+    <color value="Red"/>
+    <yAxisIndex value="0"/>
+  </Graph_series0>
+  <Graph_xAxis>
+    <initialZoom value="900000"/>
+    <initialOffset value="95"/>
+    <showGrid value="TRUE"/>
+    <gridColor value="RGB:7F7F7F7F"/>
+    <gridThickness value="1"/>
+  </Graph_xAxis>
+  <Graph_yAxes0>
+    <visible value="TRUE"/>
+    <position value="LEFT"/>
+    <gridColor value="RGB:FF7F7F7F"/>
+    <gridThickness value="1"/>
+    <color value="RGB:7F7F7F7F"/>
+    <font>
+      <size value="14"/>
+    </font>
+    <legend>
+      <title value="Temperature [°C]"/>
+      <font>
+        <size value="14"/>
+      </font>
+    </legend>
+  </Graph_yAxes0>
+  <Graph_dataTracker>
+    <enabled value="TRUE"/>
+    <showSerieName value="FALSE"/>
+    <showTimeStamp value="TRUE"/>
+    <dataPrecision value="PRECISION_01"/>
+    <font>
+      <name value="Arial"/>
+      <size value="12"/>
+      <color value="RGB:FF202020"/>
+    </font>
+  </Graph_dataTracker>
+  <Graph_annotationPanels0>
+    <enabled value="TRUE"/>
+    <overlap value="TRUE"/>
+    <text value="$AVGVALUE1$°C"/>
+    <panelTextAlign value="RIGHT"/>
+    <panelHrzAlign value="RIGHT"/>
+    <positionOffsetX value="0"/>
+    <panelVrtAlign value="CENTER"/>
+    <positionOffsetY value="0"/>
+    <font>
+      <name value="Arial"/>
+      <size value="36"/>
+      <color value="HSL:FF000079"/>
+    </font>
+    <bgColor value="Transparent"/>
+    <borderColor value="Black"/>
+    <borderthickness value="0"/>
+    <padding value="5"/>
+  </Graph_annotationPanels0>
+  <Graph_bgColor1 value="Transparent"/>
+  <Graph_bgColor2 value="Transparent"/>
+  <Graph_borderColor value="RGB:7F7F7F7F"/>
+  <Graph_borderThickness value="1"/>
+  <Form_Text value=""/>
+  <Form_BackColor value="Transparent"/>
+  <Form_BorderColor value="Transparent"/>
+</GraphForm>
+<Config>
+  <Updates>
+    <checkForUpdate value="False"/>
+  </Updates>
+</Config>
+</ROOT>
