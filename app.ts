@@ -4,7 +4,8 @@
  *
  *********************************************************************/
 
-import { YAPI, YErrorMsg, YWebPage } from './yv4web-readonly.js'
+import { YWebPage } from './yv4web-readonly.js'
+import { YAPI, YErrorMsg } from './yocto_api.js'
 import { YRelay } from './yocto_relay.js'
 
 let HeatingRelay: YRelay;
