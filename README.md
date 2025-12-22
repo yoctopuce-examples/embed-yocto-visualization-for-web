@@ -1,9 +1,10 @@
 # Simple WebApp embedding Yocto-Visualization for Web
 
 This demo project shows how to build a WebApp that can remotely control a relay to switch heating
-one and off, and show the history of measured temperatures. 
+On/Off, and show the history of measured temperatures.
+![](embed-yv4web.png)
 
-It does not depend on any third-party infrastructure, as remote control is handled by an instance of 
+It does not depend on any proprietary infrastructure, as remote control is handled by an instance of 
 [VirtualHub for Web](https://www.yoctopuce.com/EN/article/new-a-virtualhub-that-works-through-the-web),
 which you are free to install on the host of your choice, and which you can move to another host 
 in a few years' time if need be.
