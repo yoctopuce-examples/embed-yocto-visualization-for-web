@@ -2,6 +2,7 @@
 
 This demo project shows how to build a WebApp that can remotely control a relay to switch heating
 On/Off, and show the history of measured temperatures.
+
 ![](embed-yv4web.png)
 
 It does not depend on any proprietary infrastructure, as remote control is handled by an instance of 
