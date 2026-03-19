@@ -1,29 +1,27 @@
 /*********************************************************************
  *
-  *  Yoctopuce TypeScript library example
+ *  Yoctopuce TypeScript library example
  *
  *********************************************************************/
 
-import { YWebPage } from './yv4web-readonly.js'
-import { YAPI, YErrorMsg } from './yocto_api.js'
-import { YRelay } from './yocto_relay.js'
+import {YWebPage} from './yv4web-readonly.js'
+import {YAPI, YErrorMsg} from './yocto_api.js'
+import {YRelay} from './yocto_relay.js'
 
 let HeatingRelay: YRelay;
 let prevCount: number = -1;
 
-function wdg(elementId: string): HTMLElement | null
-{
+function wdg(elementId: string): HTMLElement | null {
     return document.getElementById(elementId);
 }
 
-function setStatus(msg: string): void
-{
+function setStatus(msg: string): void {
+    console.log("Stautus:" + msg);
     let div: HTMLElement | null = wdg('status');
-    if(div) div.innerHTML = msg;
+    if (div) div.innerHTML = msg;
 }
 
-async function updateStatus(): Promise<void>
-{
+async function updateStatus(): Promise<void> {
     try {
         let countdown: number = await HeatingRelay.get_pulseTimer();
         if (prevCount !== countdown) {
@@ -35,7 +33,7 @@ async function updateStatus(): Promise<void>
                 let days: number = (secs / 86400) | 0;
                 let hours: number = ((secs % 86400) / 3600) | 0;
                 let mins: number = ((secs % 3600) / 60) | 0;
-                mode = '<span class="warm">&#x1F525;</span> Heating is ON<br>'+
+                mode = '<span class="warm">&#x1F525;</span> Heating is ON<br>' +
                     `(turn off in ${days} days ${hours}h${mins})`;
             }
             setStatus(mode);
@@ -48,8 +46,7 @@ async function updateStatus(): Promise<void>
     setTimeout(updateStatus, 1000);
 }
 
-async function startYoctoVisualization4web(): Promise<boolean>
-{
+async function startYoctoVisualization4web(): Promise<boolean> {
     let configXml = await fetch('config.xml');
     if (!configXml.ok) {
         return false;
@@ -63,24 +60,28 @@ async function startYoctoVisualization4web(): Promise<boolean>
 //
 // button callbacks
 //
-(window as any).login = async function(): Promise<void>
-{
+(window as any).login = async function (): Promise<void> {
+    console.log("wtf");
     await YAPI.LogUnhandledPromiseRejections();
-
+    console.log("wtf3");
     // Connect to VirtualHub for Web instance and locate the heating relay
     let pwd: string = (<HTMLInputElement>wdg('pwd')).value;
-    let vhub: string = 'your.hosting.com/virtualhub-for-web/heating';
+    let vhub: string = 'www.yoctopuce-demo.org/CloudHub/testsuite';
     let url: string = `https://admin:${pwd}@${vhub}`;
     let errmsg: YErrorMsg = new YErrorMsg();
-    if(await YAPI.RegisterHub(url, errmsg) != YAPI.SUCCESS) {
-        setStatus('Error: '+errmsg.msg);
+    setStatus("login....");
+
+
+    if (await YAPI.RegisterHub(url, errmsg) != YAPI.SUCCESS) {
+        setStatus('Error: ' + errmsg.msg);
         return;
     }
-    if(!await startYoctoVisualization4web()) {
+    setStatus("registered");
+    if (!await startYoctoVisualization4web()) {
         setStatus('Error: Failed to load graph settings');
     }
     HeatingRelay = YRelay.FindRelay("heating");
-    if(!await HeatingRelay.isOnline()) {
+    if (!await HeatingRelay.isOnline()) {
         setStatus('Error: Relay not found');
         return;
     }
@@ -89,14 +90,13 @@ async function startYoctoVisualization4web(): Promise<boolean>
     setTimeout(updateStatus, 100);
 };
 
-(window as any).switchOn = async function(nHours: number): Promise<void>
-{
-    if(nHours) {
+(window as any).switchOn = async function (nHours: number): Promise<void> {
+    if (nHours) {
         // pulse requires a duration in [ms]
         await HeatingRelay.pulse(nHours * 3600 * 1000);
     } else {
         await HeatingRelay.set_output(YRelay.OUTPUT_OFF);
-        if(!prevCount) return; // no change expected
+        if (!prevCount) return; // no change expected
     }
     setStatus('<span class="wait">&#x23F3;</span>Sending command...');
 };
