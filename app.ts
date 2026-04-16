@@ -61,9 +61,7 @@ async function startYoctoVisualization4web(): Promise<boolean> {
 // button callbacks
 //
 (window as any).login = async function (): Promise<void> {
-    console.log("wtf");
     await YAPI.LogUnhandledPromiseRejections();
-    console.log("wtf3");
     // Connect to VirtualHub for Web instance and locate the heating relay
     let pwd: string = (<HTMLInputElement>wdg('pwd')).value;
     let vhub: string = 'www.yoctopuce-demo.org/CloudHub/testsuite';
